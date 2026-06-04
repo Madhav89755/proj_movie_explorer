@@ -8,7 +8,7 @@ from utils.common import CommonModel
 class Staff(CommonModel):
     """Model for storing directors and actors."""
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(_("Name"), max_length=255, unique=True)
 
     class Meta:
         verbose_name = _("Staff")
@@ -21,7 +21,7 @@ class Staff(CommonModel):
 class Genre(CommonModel):
     """Model for storing movie genres."""
 
-    name = models.CharField(_("Genre Name"), max_length=255)
+    name = models.CharField(_("Genre Name"), max_length=255, unique=True)
 
     class Meta:
         verbose_name = _("Genre")
@@ -34,7 +34,7 @@ class Genre(CommonModel):
 class Movie(CommonModel):
     """Model for storing movie details."""
 
-    title = models.CharField(_("Movie Title"), max_length=255)
+    title = models.CharField(_("Movie Title"), max_length=255, unique=True)
     release_date = models.DateField(_("Release Date"))
 
     genre = models.ManyToManyField(
