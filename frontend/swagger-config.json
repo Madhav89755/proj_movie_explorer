@@ -1,0 +1,771 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Movie Explorer API",
+    "description": "Movie Explorer API documentation",
+    "version": "v1"
+  },
+  "host": "localhost:8000",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "Basic": []
+    }
+  ],
+  "paths": {
+    "/genres/": {
+      "get": {
+        "operationId": "genres_list",
+        "description": "Viewset for managing genres.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Genre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "post": {
+        "operationId": "genres_create",
+        "description": "Viewset for managing genres.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "parameters": []
+    },
+    "/genres/{id}/": {
+      "get": {
+        "operationId": "genres_read",
+        "description": "Viewset for managing genres.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "put": {
+        "operationId": "genres_update",
+        "description": "Viewset for managing genres.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "patch": {
+        "operationId": "genres_partial_update",
+        "description": "Viewset for managing genres.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "delete": {
+        "operationId": "genres_delete",
+        "description": "Viewset for managing genres.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "genres"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Genre.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/movies/": {
+      "get": {
+        "operationId": "movies_list",
+        "description": "APIView for listing all movies.",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "genre_id",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "actor_id",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "director_id",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ordering",
+            "in": "query",
+            "description": "Ordering by release_date, -release_date, title, or -title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MovieList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      },
+      "parameters": []
+    },
+    "/movies/manage/": {
+      "post": {
+        "operationId": "movies_manage_create",
+        "description": "APIView for creating, updating, and deleting movies.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MovieCreateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MovieCreateUpdate"
+            }
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      },
+      "parameters": []
+    },
+    "/movies/manage/{id}/": {
+      "patch": {
+        "operationId": "movies_manage_partial_update",
+        "description": "APIView for creating, updating, and deleting movies.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MovieCreateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MovieCreateUpdate"
+            }
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      },
+      "delete": {
+        "operationId": "movies_manage_delete",
+        "description": "APIView for creating, updating, and deleting movies.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Movie.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/movies/{id}/": {
+      "get": {
+        "operationId": "movies_read",
+        "description": "APIView for retrieving a single movie.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MovieDetails"
+            }
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Movie.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/staff/": {
+      "get": {
+        "operationId": "staff_list",
+        "description": "Viewset for managing staff members.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Staff"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "post": {
+        "operationId": "staff_create",
+        "description": "Viewset for managing staff members.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "parameters": []
+    },
+    "/staff/{id}/": {
+      "get": {
+        "operationId": "staff_read",
+        "description": "Viewset for managing staff members.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "put": {
+        "operationId": "staff_update",
+        "description": "Viewset for managing staff members.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "patch": {
+        "operationId": "staff_partial_update",
+        "description": "Viewset for managing staff members.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Staff"
+            }
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "delete": {
+        "operationId": "staff_delete",
+        "description": "Viewset for managing staff members.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Staff.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Genre": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Genre Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        }
+      }
+    },
+    "MovieList": {
+      "required": [
+        "title",
+        "release_date"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "meta_data": {
+          "title": "Meta data",
+          "type": "object",
+          "x-nullable": true
+        },
+        "title": {
+          "title": "Movie Title",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "release_date": {
+          "title": "Release Date",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "MovieCreateUpdate": {
+      "required": [
+        "title",
+        "release_date",
+        "director",
+        "genre",
+        "actors"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "meta_data": {
+          "title": "Meta data",
+          "type": "object",
+          "x-nullable": true
+        },
+        "title": {
+          "title": "Movie Title",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "release_date": {
+          "title": "Release Date",
+          "type": "string",
+          "format": "date"
+        },
+        "director": {
+          "title": "Director",
+          "type": "integer"
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "uniqueItems": true
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Staff": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        }
+      }
+    },
+    "MovieDetails": {
+      "required": [
+        "title",
+        "release_date"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Genre"
+          },
+          "readOnly": true
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Staff"
+          },
+          "readOnly": true
+        },
+        "director": {
+          "$ref": "#/definitions/Staff"
+        },
+        "created_at": {
+          "title": "Created at",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_at": {
+          "title": "Updated at",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "meta_data": {
+          "title": "Meta data",
+          "type": "object",
+          "x-nullable": true
+        },
+        "title": {
+          "title": "Movie Title",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "release_date": {
+          "title": "Release Date",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}
