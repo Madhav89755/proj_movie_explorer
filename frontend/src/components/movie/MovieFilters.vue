@@ -24,6 +24,7 @@ const localFilters = reactive({
   actor_id: props.modelValue.actor_id || '',
   director_id: props.modelValue.director_id || '',
   ordering: props.modelValue.ordering || '-release_date',
+  overall_rating : props.modelValue.overall_rating || ''
 })
 
 watch(
@@ -34,6 +35,7 @@ watch(
     localFilters.actor_id = value.actor_id || ''
     localFilters.director_id = value.director_id || ''
     localFilters.ordering = value.ordering || '-release_date'
+    localFilters.overall_rating = value.overall_rating || ''
   },
 )
 
@@ -51,7 +53,8 @@ function resetFilters() {
     genre_id: '',
     actor_id: '',
     director_id: '',
-    ordering: '-release_date',
+    ordering: '-release_date',  
+    overall_rating:''
   }
 
   emit('update:modelValue', empty)
@@ -71,6 +74,16 @@ function resetFilters() {
         type="text"
         class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 outline-none ring-0 transition focus:border-sky-400"
         placeholder="Example: Hidden Horizon"
+      />
+    </label>
+
+    <label class="space-y-2 text-sm text-slate-700">
+      <span class="font-semibold">Search by Rating</span>
+      <input
+        v-model="localFilters.overall_rating"
+        type="text"
+        class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 outline-none ring-0 transition focus:border-sky-400"
+        placeholder="Example: 5"
       />
     </label>
 

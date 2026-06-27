@@ -32,6 +32,7 @@ const filters = ref({
   actor_id: '',
   director_id: '',
   ordering: '-release_date',
+  overall_rating:''
 })
 
 async function loadFilterOptions() {
@@ -72,6 +73,7 @@ function onResetFilters() {
     actor_id: '',
     director_id: '',
     ordering: '-release_date',
+    overall_rating:''
   }
   loadMovies()
 }

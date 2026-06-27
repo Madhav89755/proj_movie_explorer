@@ -25,6 +25,7 @@ class MovieFilter(filters.FilterSet):
     actor_id = filters.NumberFilter(field_name="actors__id")
     director_id = filters.NumberFilter(field_name="director__id")
     genre_id = filters.NumberFilter(field_name="genre__id")
+    overall_rating=filters.NumberFilter(field_name="movie_overall_rating")
 
     ordering = filters.OrderingFilter(
         fields={
@@ -36,4 +37,4 @@ class MovieFilter(filters.FilterSet):
 
     class Meta:
         model = Movie
-        fields = ["title", "genre_id", "actor_id", "director_id"]
+        fields = ["title", "genre_id", "actor_id", "director_id", "overall_rating"]

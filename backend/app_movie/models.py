@@ -53,6 +53,7 @@ class Movie(CommonModel):
         verbose_name=_("Actors"),
         related_name="movies",
     )
+    movie_overall_rating=models.FloatField(_("Overall Rating"), default=5.5)
 
     class Meta:
         verbose_name = _("Movie")
